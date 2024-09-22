@@ -19,7 +19,7 @@ class Game:
 
     INFO_FILE_PATH = "info.csv"
 
-    def __init__(self, folder_path, num_people, random_seed, past_people=None, people=None):
+    def __init__(self, folder_path: str, num_people: int, random_seed: int, past_people=None, people=None):
         random.seed(random_seed)
         self.folder_path = folder_path
         self.past_people = past_people or []
@@ -37,14 +37,14 @@ class Game:
                 images.setdefault(person_name, []).append(filename)
         return images
 
-    def _select_people(self, num_people):
+    def _select_people(self, num_people: int):
         """Selects a random person and valid matches for the game."""
         first_person = random.choice(list(self.images.keys()))
         valid_choices = self._get_valid_people(first_person)
         other_people = random.sample(valid_choices, num_people - 1)
         return [first_person] + other_people
 
-    def _get_valid_people(self, first_person):
+    def _get_valid_people(self, first_person: str):
         """Finds people with matching attributes for the game."""
         info = pd.read_csv(self.INFO_FILE_PATH)
         person_info = info[info.name == first_person].iloc[0]
@@ -96,7 +96,7 @@ def display_images():
         st.image(images[1], width=200)
 
 
-def update_score(user_choice):
+def update_score(user_choice: str):
     """Updates the score based on the user's choice."""
     people_names = [img.person_name for img in st.session_state.current_images]
     correct_answer = "Yes" if people_names[0] == people_names[1] else "No"
@@ -120,7 +120,7 @@ def reset_game():
         st.rerun()
 
 
-def submit(user_choice):
+def submit(user_choice: str):
     st.session_state.step += 1
     st.session_state.total_steps += 1
     print(f"{st.session_state.step = }")
