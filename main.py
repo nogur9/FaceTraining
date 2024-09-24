@@ -89,7 +89,7 @@ def display_images():
     """Displays two images side by side for the user to compare."""
     col1, col2 = st.columns(2)
     images = [img.image_path for img in st.session_state.current_images]
-
+    print(f"{images = }")
     with col1:
         st.image(images[0], width=200)
     with col2:
