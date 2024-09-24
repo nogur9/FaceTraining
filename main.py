@@ -112,7 +112,6 @@ def reset_game():
     """Resets the game after 5 steps."""
     if st.session_state.step >= 5:
         st.session_state.step = 0
-        st.session_state.score = 0
         st.session_state.random_seed = random.randint(10000, 100000)
         st.session_state.game = Game('images', 2, st.session_state.random_seed)
         st.session_state.people = st.session_state.game.people
@@ -135,7 +134,7 @@ def submit(user_choice: str):
 
 
 def main():
-    st.title("Face-Blindness Training")
+    st.title("Can you recognize faces?")
 
     # Initialize session state
     initialize_game_state()
@@ -145,7 +144,7 @@ def main():
         user_choice = st.radio("Are these images of the same person?", options=["Yes", "No"])
         if st.button("Submit"):
             submit(user_choice)
-            sleep(2)
+            sleep(1)
             st.rerun()
 
     else:
