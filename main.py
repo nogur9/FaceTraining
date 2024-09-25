@@ -69,7 +69,7 @@ class Game:
 def initialize_game_state():
     """Initializes game-related variables in session state."""
     if 'random_seed' not in st.session_state:
-        st.session_state.random_seed = 67
+        st.session_state.random_seed = random.randint(0, 3000)
     if 'score' not in st.session_state:
         st.session_state.score = 0
     if 'game' not in st.session_state:
